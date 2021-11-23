@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <?php
     /*Juan Manuel Toscano Reyes*/
@@ -20,7 +23,7 @@
         </header>
         <nav id="horizontal">
             <ul>
-                <li><a>Lorem</a></li>
+                <li><?php echo '<a href="'.$operaciones->cerrarSesion().'">Cerrar Sesión</a>';?></li>
             </ul>
         </nav>
         <aside>
@@ -32,10 +35,11 @@
             </nav>
             <section>
                 <?php
+                    echo '<h4>Sesión iniciada con '.$_SESSION['nombreUsuario'];
                     //Compruebo que operación hay que realizar
                     if($_GET['op']=='corr'){
                         echo '<h3>Modificación del correo</h3>';
-                        $consulta= "SELECT * FROM `administrador` WHERE idAdmin='".$_GET['idAdmin']."';";
+                        $consulta= "SELECT * FROM `administrador` WHERE idAdmin='".$_SESSION['id']."';";
 
                         $resultado=$operaciones->consultar($consulta);
                         while($fila=$resultado->fetch_array(MYSQLI_ASSOC)){
@@ -55,7 +59,7 @@
                         
                     }else{
                         echo '<h3>Modificación de la contraseña</h3>';
-                        $consulta= "SELECT * FROM `administrador` WHERE idAdmin='".$_GET['idAdmin']."';";
+                        $consulta= "SELECT * FROM `administrador` WHERE idAdmin='".$_SESSION['id']."';";
 
                         $resultado=$operaciones->consultar($consulta);
                         while($fila=$resultado->fetch_array(MYSQLI_ASSOC)){

@@ -23,7 +23,7 @@
         </header>
         <nav id="horizontal">
             <ul>
-                <li><a>Lorem</a></li>
+                <li><?php echo '<a href="'.$operaciones->cerrarSesion().'">Cerrar Sesión</a>';?></li>
             </ul>
         </nav>
         <aside>
@@ -48,11 +48,12 @@
                         $resultado=$operaciones->consultar($consulta);
                         $fila=$resultado->fetch_array(MYSQLI_ASSOC);
                         if($fila){
-                            $_SESSION['id']=
+                            $_SESSION['id']=$fila['idAdmin'];
+                            $_SESSION['nombreUsuario']=$fila['nombreUsuario'];
                             //Escribo el usuario iniciado con los enlaces a modificar y la paso las variables necesarias por GET
                             echo 'Se ha iniciado sesión con el usuario: '.$fila['nombreUsuario'].'<br>';
-                            echo '<a href="modificar.php?op=corr&idAdmin='.$fila['idAdmin'].'">Modificar correo</a><br>';
-                            echo '<a href="modificar.php?op=contra&idAdmin='.$fila['idAdmin'].'">Modificar contraseña</a>';
+                            echo '<a href="modificar.php?op=corr">Modificar correo</a><br>';
+                            echo '<a href="modificar.php?op=contra">Modificar contraseña</a>';
                             
                         }else{
                             echo 'No se ha iniciado sesión correctamente';

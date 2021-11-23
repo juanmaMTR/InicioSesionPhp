@@ -11,6 +11,10 @@
         function consultar($consulta){
             return $this->conexion->query($consulta);
         }
+        function cerrarSesion(){
+            session_destroy();
+            return 'iniciosesion.php';
+        }
         
     }
 ?>
